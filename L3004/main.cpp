@@ -8,7 +8,7 @@ using namespace std;
 const int maxn=1e5+10;
 
 ///bfs!
-///坐标题：做题前，先明确x,y,z的意义，n,m，读入方式。
+///做题前，先明确x,y,z坐标轴的定义，n,m的定义，读入方式。
 
 bool a[61][1287][129];
 int dx[6]={0,0,-1,1,0,0};
