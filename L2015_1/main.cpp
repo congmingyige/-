@@ -6,25 +6,29 @@
 using namespace std;
 
 const int maxn=1e4+10;
-
+const int inf=1e9;
 double s[maxn]; ///no need to initialize
-int a[11];
 
 int main()
 {
-	int n,m,q,i,j;
+	int n,m,q,i,j,x,y,a;
 	/**
 	我的建议是k改成q，避免有时变量i,j,k...的使用，导致重复
 	**/
 	scanf("%d%d%d",&n,&m,&q);
 	for (i=1;i<=n;i++)
 	{
+        x=inf,y=0;
         for (j=0;j<m;j++)
-            scanf("%d",&a[j]);
-		sort(a,a+m);  ///这是因为k小，所以才这样做，代码量较小
-		for (j=1;j<m-1;j++)
-			s[i]+=a[j];
-		s[i]/=(m-2);
+        {
+            ///当遇到break,continue等操作，分多行写；这里第一行和第二行是可以合并写的，用','隔开
+            scanf("%d",&a);
+            s[i]+=a;
+            x=min(x,a);
+            y=max(y,a);
+        }
+
+		s[i]=(s[i]-x-y)/(m-2);
 	}
 	sort(s+1,s+n+1);
 	for (i=n-q+1;i<=n;i++)
