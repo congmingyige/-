@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1552661551 source:c:\users\scientific\cccc_code\l3012\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<algorithm>
+

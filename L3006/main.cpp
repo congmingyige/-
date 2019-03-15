@@ -10,7 +10,7 @@ const int maxn=1e3+10;
 ///easy to get some points
 /*
 all NO/YES
-something NO else YES
+something NO(Àıºı∞Ê≈–∂œ) else YES
 */
 
 /*

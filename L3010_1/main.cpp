@@ -12,59 +12,59 @@ using namespace std;
 const int maxn=1e3+10;
 const double eps=1e-8;
 
-int s,i,q[maxn],ind[maxn];
+int n,s,i,q[maxn];
+bool vis=1;
 
 struct node
 {
     int s,l,r;
 }tr[maxn];
 
-void work(int d)
+void work(int d,int ind)
 {
     if (s>tr[d].s)
     {
+        ind<<=1;
         if (tr[d].l==0)
-            tr[d].l=i;
+            tr[d].l=i,vis=vis && (ind<=n);
         else
-            work(tr[d].l);
+            work(tr[d].l,ind);
     }
     else
     {
+        ind=ind<<1|1;
         if (tr[d].r==0)
-            tr[d].r=i;
+            tr[d].r=i,vis=vis && (ind<=n);
         else
-            work(tr[d].r);
+            work(tr[d].r,ind);
     }
 }
 
 int main()
 {
-    int n,head,tail,d;
-    bool vis=1;
+    int head,tail,d;
     scanf("%d",&n);
     for (i=1;i<=n;i++)
     {
         scanf("%d",&s);
         tr[i].s=s;
         if (i!=1)
-            work(1);
+            work(1,1);
     }
 
-    q[1]=1,ind[1]=1;
+    q[1]=1;
     head=0,tail=1;
     while (head<tail)
     {
         head++;
-        if (ind[head]>n)
-            vis=0;
         d=q[head];
         if (head!=1)
             printf(" ");
         printf("%d",tr[d].s);
         if (tr[d].l!=0)
-            q[++tail]=tr[d].l,ind[tail]=ind[head]<<1;
+            q[++tail]=tr[d].l;
         if (tr[d].r!=0)
-            q[++tail]=tr[d].r,ind[tail]=ind[head]<<1|1;
+            q[++tail]=tr[d].r;
     }
     printf("\n");
     if (vis)
