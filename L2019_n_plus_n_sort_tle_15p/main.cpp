@@ -19,11 +19,6 @@ struct node
     }
 }x[maxn],y[maxn];
 
-int cmp(const void *a,const void *b)
-{
-    return strcmp((char*)a,(char*)b);
-}
-
 int main()
 {
     int n,m,i,j,g=0;
@@ -43,7 +38,11 @@ int main()
         if (x[i].b>tot)
             y[++g]=x[i];
     sort(y+1,y+g+1);
-    qsort(str+1,n,sizeof(str[0]),cmp);
+    ///n*n/2 * 4(len of y[k]) =50000000
+    for (i=1;i<n;i++)
+        for (j=i+1;j<=n;j++)
+            if (strcmp(str[i],str[j])>0)
+                swap(str[i],str[j]);    ///交换的是两个指针
 
     j=1;
     for (i=1;i<=g;i++)

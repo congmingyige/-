@@ -1,8 +1,3 @@
-/**
-wrong code
-反转
-**/
-
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
@@ -11,91 +6,114 @@ wrong code
 using namespace std;
 
 /**
-cheat_pass:
+线向上/下平移，必到达其中一条线段的端点
+
+g++:y1是保留变量，不能用！
+改成clang++
+
+暴力，居然过了！
+O(n*n)
+
 非常好的优化：https://blog.csdn.net/foreyes_1001/article/details/52208749
-
-另外的方法：
-选择上凹或者下凸都可以
-
-这里选择下凸，最多有n-1条边，
-最多判断(n-1)(n-2)/2次，
-参见证明doc
 **/
 
-const int maxn=1e3+10;
+const int maxn=1e4+10;
 const int inf=1e9;
 
 struct node
 {
-    int x,y,yy;
-}d[maxn],a[maxn];
+    int x,y1,y2;
+}d[maxn];
 
-int cross(node c,node a,node b)
-{
-    ///都以c开头
-    return (c.y-a.y)*(c.x-b.x) - (c.x-a.x)*(c.y-b.y);
-}
-
-bool cmp(node a,node b)
-{
-    int v=cross(d[1],a,b);
-    if (v==0)
-        return a.x<b.x;
-    return v>0;
-}
-
-bool cmp1(node c,node a,node b)
-{
-    int v=cross(d[0],a,b);
-    if (v==0)
-        return a.x<b.x;
-    return v>0;
-}
 
 int main()
 {
-    int n,m,ind=0,i,j;
-    double k,b;
-    d[0].x=inf;
+    int n,i,j,ymin=-inf,ymax=inf,xx,yy,a,b;
+    double v,kmin,kmax;
     scanf("%d",&n);
     for (i=1;i<=n;i++)
     {
-        scanf("%d%d%d",&d[i].x,&d[i].yy,&d[i].y);
-        if (d[i].x<d[ind].x)
-            ind=i;
+        scanf("%d%d%d",&d[i].x,&d[i].y2,&d[i].y1);    ///y11<y2
+        ymin=max(ymin,d[i].y1);
+        ymax=min(ymax,d[i].y2);
     }
-    swap(d[1],d[ind]);
-    sort(d+2,d+n+1,cmp);
-
-    a[1]=d[1],a[2]=d[2];
-    m=2;
-    for (i=3;i<=n;i++)
+    ///与x轴平行(若n很大，后面的方法会超时，若此时这种情况有解，即可骗到分)
+//    if (ymin<=ymax)
+//    {
+//        printf("%d %d %d %d",-1,ymin,0,ymin);
+//        return 0;
+//    }
+    ///以线段i的上端点作为直线上的一点
+    for (i=1;i<=n;i++)
     {
-        while (m>=2 && cmp1(a[m],a[m-1],d[i])==0)
-            m--;
-        a[++m]=d[i];
-    }
-
-    for (i=2;i<=m;i++)
-    {
-        k=1.0*(a[i].y-a[i-1].y)/(a[i].x-a[i-1].x);
-        b=a[i].y-k*a[i].x;
-        for (j=i+1;j<=m;j++)
-            if (a[j].yy-a[j].x*k-b<-1e8)
-                break;
-        if (j==m+1)
+        xx=d[i].x,yy=d[i].y2;
+        kmin=-inf;
+        kmax=inf;
+        for (j=1;j<=n;j++)
+            if (d[j].x<xx)
+            {
+                v=1.0*(yy-d[j].y2)/(xx-d[j].x);
+                if (v>kmin)
+                {
+                    kmin=v;
+                    a=j,b=0;
+                }
+    //            kmin=max(kmin,1.0*(yy-d[j].y2)/(xx-d[j].x));
+                kmax=min(kmax,1.0*(yy-d[j].y1)/(xx-d[j].x));
+                if (kmin>kmax)     ///!!!
+                    break;
+            }
+            else if (d[j].x>xx)
+            {
+                v=1.0*(yy-d[j].y1)/(xx-d[j].x);
+                if (v>kmin)
+                {
+                    kmin=v;
+                    a=j,b=1;
+                }
+    //            kmin=max(kmin,1.0*(yy-d[j].y1)/(xx-d[j].x));
+                kmax=min(kmax,1.0*(yy-d[j].y2)/(xx-d[j].x));
+                if (kmin>kmax)
+                    break;
+            }
+        if (kmin<=kmax)
         {
-            printf("%d %d %d %d",a[i-1].x,a[i-1].y,a[i].x,a[i].y);
+            if (n==1)
+                printf("%d %d %d %d",-1,d[1].y1,0,d[1].y1);
+            else if (b==0)
+                printf("%d %d %d %d",d[i].x,d[i].y2,d[a].x,d[a].y2);
+            else
+                printf("%d %d %d %d",d[i].x,d[i].y2,d[a].x,d[a].y1);
             return 0;
         }
     }
+
     return 0;
 }
 /*
+2
+0 2 0
+1 3 1
+
+3
+0 2 0
+1 3 1
+2 2 0
+
+3
+0 2 0
+1 3 1
+2 8 6
+
+3
+0 2 0
+1 3 1
+2 0 -1
+
 5
-0 6 0
-1 6 1
-2 6 3
-3 6 4
-4 6 5
+121 123 1234
+2134 12 35
+123 541 21
+125 125 54
+54 12 35
 */

@@ -10,7 +10,7 @@ y1>y2
 Æ½ÐÐÏß
 **/
 
-const int maxn=1e3+10;
+const int maxn=1e4+10;
 const int inf=1e9;
 
 

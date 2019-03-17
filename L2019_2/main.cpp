@@ -3,11 +3,17 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
+#include <map>
 using namespace std;
+
+/**
+map
+**/
 
 const int maxn=1e4+10;
 
-char str[maxn][5];
+char str[5];
+map<string,int>ma;
 
 struct node
 {
@@ -19,19 +25,17 @@ struct node
     }
 }x[maxn],y[maxn];
 
-int cmp(const void *a,const void *b)
-{
-    return strcmp((char*)a,(char*)b);
-}
-
 int main()
 {
-    int n,m,i,j,g=0;
-    double tot=0;
+    int n,m,g=0,i;
     bool vis=0;
+    double tot=0;
     scanf("%d",&n);
     for (i=1;i<=n;i++)
-        scanf("%s",str[i]);
+    {
+        scanf("%s",str);
+        ma[str]=1;
+    }
     scanf("%d",&m);
     for (i=1;i<=m;i++)
     {
@@ -43,17 +47,11 @@ int main()
         if (x[i].b>tot)
             y[++g]=x[i];
     sort(y+1,y+g+1);
-    qsort(str+1,n,sizeof(str[0]),cmp);
 
-    j=1;
     for (i=1;i<=g;i++)
-    {
-        while (j!=n+1 && strcmp(str[j],y[i].a)<0)
-            j++;
-        if (strcmp(str[j],y[i].a)!=0)
+        if (ma.find(y[i].a)==ma.end())
             printf("%s\n",y[i].a),vis=1;
-    }
     if (!vis)
-        printf("Bing Mei You");
+        printf("Bing Mei You\n");
     return 0;
 }

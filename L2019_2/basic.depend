@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1552828982 source:c:\users\scientific\cccc_code\l2019_2\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<algorithm>
+	<map>
+
