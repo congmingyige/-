@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+char str[1010][1010];
+
+/**
+除了字符串排序，使用sort好过qsort
+
+与c++不同，返回的是int类型
+
+Compare 函数的返回值
+< 0	elem1将被排在elem2前面
+0 	elem1 等于 elem2
+> 0	elem1 将被排在elem2后面
+
+const void *
+**/
+
+int cmp(const void *a,const void *b)
+{
+    return strcmp((char*)a,(char*)b);
+}
+
+int main()
+{
+    int n,i;
+    scanf("%d",&n);
+    for (i=1;i<=n;i++)
+        scanf("%s",str[i]);
+    qsort(str+1,n,sizeof(str[0]),cmp);
+    for (i=1;i<=n;i++)
+        printf("%s\n",str[i]);
+    return 0;
+}
+/*
+6
+abc
+dba
+ab
+abc
+se
+dddddd
+*/

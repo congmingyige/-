@@ -5,6 +5,13 @@
 #include <algorithm>
 using namespace std;
 
+/*
+在之前的基础上
+
+所有程序=( 一个语句|代码块 )*
+
+*/
+
 const int maxn=1e3+10;
 
 char str[maxn],c=' ';
@@ -48,20 +55,31 @@ struct node
     **/
     void work5()
     {
+        cls();
         pb();
         j=i;
-        ///这里代码有问题
-//        while (str[i]!=';')
-        while (i<len && str[i]!=';')
+        ///修改这里的代码
+        while (i<len && str[i]!=';' && str[i]!='{')
             i++;
-        if (i==len)
+        if (str[i]==';')
         {
-            i--;
-            exit(0);
+            print(j,i);
+            i++;
+            printf("\n");
         }
-        print(j,i);
-        i++;
-        printf("\n");
+        else if (str[i]=='{')
+        {
+            int k=i-1;
+            while (str[k]==' ')
+                k--;
+            print(j,k);
+            printf("\n");
+            work1(2);
+        }
+        else
+        {
+            ///到达结尾，无任何操作
+        }
     }
 
     ///condtion
@@ -140,7 +158,7 @@ struct node
 //                break;
 
             cls();
-            if (str[i]=='}' || i>=len)  ///|| i>=len test
+            if (str[i]=='}')
                 break;
             cls();
             if (len-i>=1 && str[i]=='{')
@@ -162,8 +180,6 @@ struct node
         cls();
         if (cond!=0)
             i++;
-        if (i==len)
-            return;
     //    if (str[i]=='{')
     //        print(i,i);
     //    else
@@ -174,7 +190,6 @@ struct node
 
 int main()
 {
-    int j,k;
     fgets(str,maxn,stdin);
     len=strlen(str);
 
@@ -182,21 +197,10 @@ int main()
     if (str[len-1]=='\n')
         len--,str[len]=0;
 
-    for (i=0;i<len;i++)
-        if (str[i]=='{')
-            break;
+    i=0;
+    while (i<len)
+        f.work5();
 
-    j=0;
-    while (str[j]==' ')
-        j++;
-    k=i-1;
-    while (str[k]==' ')
-        k--;
-    if (j<=k)
-        f.print(j,k);
-    printf("\n");
-    if (i!=len)
-        f.work1(2);
     return 0;
 }
 
@@ -298,7 +302,7 @@ int main() { for (i=1;i<=3;i++) if (i<2) break; else j=1; }
 
 int main() { for (i=1;i<=n;i++) for (j=1;j<=n;j++) if (i!=j) for (k=1;k<=n;k++) if (i!=k && j!=k) { a=1; } else b=2; else c=3; }
 */
-///其它 不必实现
+///其它
 /*
 
 //仅多个空格
@@ -311,7 +315,7 @@ void work1(); void work2();
 
 ///not need, can't work
 
-const int maxn=10; int main() { i=3; }
+const int maxn=10; int main() { i=3; } const int maxm=10; void test() {i=1;}
 
 int work1() { return 1; } int main() { printf("%d",work1()); }
 

@@ -114,6 +114,22 @@ scanf("%lf",&a);
 =============================
 
 排序：
+bool cmp(int a,int b)
+{
+	return a<b;
+}
+
+struct node
+{
+	int a,b;
+	bool operator<(node y)
+	{
+		if (a==y.a)
+			return b<y.b;
+		return a<y.a;
+	}
+}
+
 仅一个关键字，倒序输出
 sort(a,a+n);
 for (i=n-1;i>=0;i--)
@@ -136,10 +152,25 @@ else
 	...
 }
 
+字符串排序
+c qsort 字符串排序.txt
+注意c和c++使用方法的不同，比赛前不看模板，自行打一遍
+
 =============================
 
 c++ stl
 感觉map有必要学一下
+#include <map>
+unordered_map某些方面比map快，但一般天梯赛不会出现用map超时，用unordered_map不超时的情况
+
+map<x,y> f;
+x,y均为数据类型
+
+f[x]=y;	///赋值
+if (f.find(x)==f.end())	///x不在f中
+	xxx
+
+printf("%d",f[x]);	///前提是x在f中
 
 =============================
 
@@ -173,6 +204,11 @@ long long [-2^63,2^63)
 short
 unsigned int
 unsigned short
+
+两数相乘也许大于int范围，
+首先结果的数据类型为long long，
+其次，两数的数据类型至少有一个为long long，
+或者这样写1ll*a*b
 
 =============================
 
