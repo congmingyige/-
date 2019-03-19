@@ -5,35 +5,73 @@
 #include <algorithm>
 using namespace std;
 
-/**
-2^31，其实超过int范围，但是没有坑数据
-1
-2147483648
-**/
-
 const int maxn=1e5+10;
+const double eps=1e-8;
 
-int a[maxn];
+double a[maxn],b[maxn];
+double x[maxn],p1[maxn];
+int p2[maxn];
+
 
 int main()
 {
-    int n,x,i;
-    long long v=0;
+    int n,m,g=0,s,t,w1=0,w2=0,i,j;
+    double v;
     scanf("%d",&n);
     for (i=1;i<=n;i++)
-        scanf("%d",&a[i]);
-    sort(a+1,a+n+1);
-    x=n/2;
-    for (i=1;i<=x;i++)
-        v-=a[i];
-    for (i=x+1;i<=n;i++)
-        v+=a[i];
-/// \\行连接符。 这样做：感觉这样会快一点。copy的话，会调到下一行。
-printf("Outgoing #: %d\n\\
-Introverted #: %d\n\\
-Diff = %lld",n-x,x,v);
-//    printf("Outgoing #: %d\n",n-x);
-//    printf("Introverted #: %d\n",x);
-//    printf("Diff = %lld\n",v);
+    {
+        scanf("%d%d",&s,&t);
+        a[s]=t;
+        w1=max(w1,s);
+    }
+    scanf("%d",&m);
+    for (i=1;i<=m;i++)
+    {
+        scanf("%d%d",&s,&t);
+        b[s]=t;
+        w2=max(w2,s);
+    }
+    for (i=w1;i>=w2;i--)
+    {
+        v=a[i]/b[w2];
+        if (v<-0.1+eps || v>0.1-eps)	///
+        {
+            p1[++g]=v;
+            p2[g]=i-w2;
+            for (j=w2;j>=0;j--)
+                a[i+j-w2]-=v*b[j];
+        }
+
+    }
+
+    if (g==0)
+        printf("0 0 0.0");
+    else
+    {
+        printf("%d",g);
+        for (i=1;i<=g;i++)
+            printf(" %d %.1f",p2[i],p1[i]);
+    }
+
+    g=0;
+    for (i=w2-1;i>=0;i--)
+        if (a[i]<-0.1+eps || a[i]>0.1-eps)
+            p1[++g]=a[i],p2[g]=i;
+
+    if (g==0)
+        printf("\n0 0 0.0");
+    else
+    {
+        printf("\n%d",g);	///
+        for (i=1;i<=g;i++)
+            printf(" %d %.1f",p2[i],p1[i]);
+    }
     return 0;
 }
+/*
+1 1 2
+2 1 2 2 3
+
+1 1 2
+1 1 2
+*/

@@ -5,40 +5,40 @@
 #include <algorithm>
 using namespace std;
 
-///���װ�
+///内存使用最少，画图分析
 
 const int maxn=1e3+10;
 const int inf=1e9;
 const double eps=1e-8;
 
-char str[maxn],p[maxn][maxn];   ///ע���ڴ�����
+char str[maxn];
 
 int main()
 {
-    int n,m,i,j,g=0,len;
+    int n,m,i,j,k,len;
     scanf("%d",&n);
-    fgets(str,maxn,stdin);
+    fgets(str,maxn,stdin);  ///\n，也可以scanf("%d\n",&n);
     fgets(str,maxn,stdin);
 
     len=strlen(str);
-    len--;
+    len--;                  ///天梯赛评测系统，永远要去末尾'\n'
+    //str[len]=0;
 
     m=len/n+(len%n!=0);
 
-    for (j=m;j>=1;j--)
-        for (i=1;i<=n;i++)
-        {
-            if (g<len)
-                p[i][j]=str[g];
-            else
-                p[i][j]=' ';
-            g++;
-        }
     for (i=1;i<=n;i++)
     {
         for (j=1;j<=m;j++)
-            printf("%c",p[i][j]);
+        {
+            k=(m-j)*n+i-1;
+            if (k>=len)
+                printf(" ");
+            else
+                printf("%c",str[k]);
+        }
         printf("\n");
     }
+
+
     return 0;
 }
