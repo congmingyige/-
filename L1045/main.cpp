@@ -3,14 +3,16 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
+#include <set>
+#include <map>
 using namespace std;
-
-const int maxn=1e3+10;
 
 
 
 int main()
 {
-
+    char str[100];
+    scanf("%s",str);
+    printf("Hello %s",str);
     return 0;
 }

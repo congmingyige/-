@@ -6,7 +6,8 @@
 using namespace std;
 
 /**
-假设只有一个点
+y1>y2
+平行线
 **/
 
 const int maxn=1e4+10;
@@ -15,8 +16,13 @@ const int inf=1e9;
 
 int main()
 {
-    int n,x,y1,y2;
-    scanf("%d%d%d%d",&n,&x,&y2,&y1);
-    printf("%d %d %d %d",-1,y1,0,y1);
+    int n,x,y1,y2,ymin=-inf,i;
+    scanf("%d",&n);
+    for (i=1;i<=n;i++)
+    {
+        scanf("%d%d%d",&x,&y2,&y1);
+        ymin=max(ymin,y1);
+    }
+    printf("%d %d %d %d",-1,ymin,0,ymin);
     return 0;
 }
