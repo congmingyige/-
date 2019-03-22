@@ -8,7 +8,7 @@ using namespace std;
 /*
 windows
 比对输出
-fc 1.txt 3.txt
+fc 1.txt 2.txt
 
 运行
 x.exe
