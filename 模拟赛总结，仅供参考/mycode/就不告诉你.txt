@@ -1,0 +1,31 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+#include <algorithm>
+#include <set>
+#include <map>
+#include <queue>
+using namespace std;
+
+#define ll long long
+
+const int maxn=1e4+10;
+const int inf=1e9;
+const double eps=1e-8;
+
+char s[10][10];
+
+int main()
+{
+    int n,i,j;
+    scanf("%d",&n);
+    for (i=1;i<=n;i++)
+    {
+        scanf("%s%s%s%s",s[0],s[1],s[2],s[3],s[4]);
+        for (j=0;j<4;j++)
+            if (s[j][2]=='T')
+                printf("%d",s[j][0]-'A'+1);
+    }
+    return 0;
+}
