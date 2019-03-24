@@ -23,17 +23,12 @@ struct node
     {
         scanf("%lld%lld",&x,&y);
     }
-    void operator=(node b)
+    ///不要返回void，这妨碍了连续赋值操作(study from https://bbs.csdn.net/topics/330085641)
+    node operator==(node b)
     {
-        x=b.x;
-        y=b.y;
+        return b;
     }
-    ///��������д
-//    node operator==(node b)
-//    {
-//        return b;
-//    }
-}d[maxn],dd;
+}d[maxn],x,y;
 
 bool cross(node d1,node d2,node d3)
 {
@@ -45,22 +40,19 @@ int main()
     int n,i,g=0,w;
     scanf("%d",&n);
     d[1].init();
-    d[2].init();
-    w=2;
+    x.init();
+    w=1;
     for (i=3;i<=n;i++)
     {
-        dd.init();
-        if (cross(d[w-1],d[w],dd))
-        {
-            g++;
-        }
+        y.init();
+        if (cross(d[w],x,y))
+            g++,d[++w]=x;
         else
         {
-            while (w>=2 && !cross(d[w-1],d[w],dd))
+            while (w>=2 && !cross(d[w-1],d[w],y))
                 w--;
         }
-        d[++w]=dd;
-
+        x=y;
     }
     printf("%d",g);
     return 0;
