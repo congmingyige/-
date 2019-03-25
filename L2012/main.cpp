@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <cstring>
+#include <string>
 #include <algorithm>
 #include <set>
 #include <map>
@@ -11,16 +12,16 @@ using namespace std;
 
 #define ll long long
 
-const int maxn=2e4+10;
+const int maxn=1e4+10;
 const int inf=1e9;
 const double eps=1e-8;
 
-int z[maxn],pos[maxn];
-///10000*2
+int z[maxn];
+map<int,int> ma;
 
-void up(int i)
+void push(int i)
 {
-    while (i!=1 && z[i]<z[i>>1])
+    while (i!=1 && z[i>>1]>z[i])
     {
         swap(z[i],z[i>>1]);
         i>>=1;
@@ -37,56 +38,43 @@ void print(bool v)
 
 int main()
 {
-    int n,m,delta=1e4,a,f,i,x;
-    char b[20],c[20],d[20],e[20];
+    int n,m,i,a,b;
+    string c,d;
     scanf("%d%d",&n,&m);
     for (i=1;i<=n;i++)
     {
-        scanf("%d",&x);
-        z[i]=x;
-        up(i);
+        scanf("%d",&z[i]);
+        push(i);
     }
-    ///negftive
     for (i=1;i<=n;i++)
-        pos[z[i]+delta]=i;
+        ma[z[i]]=i;
     while (m--)
     {
-        scanf("%d%s",&a,b);
-        a+=delta;
-        if (strcmp(b,"and")==0)
+        cin>>a>>c;
+        if (c=="is")
         {
-            ///2
-            scanf("%d",&f);
-            f+=delta;
-            fgets(c,maxn,stdin);
-            print(pos[a]/2==pos[f]/2 && min(pos[a],pos[f])%2==0);
-        }
-        else
-        {
-            scanf("%s%s",c,d);
-            if (strcmp(c,"a")==0)
+            cin>>c>>d;
+            if (d=="root")
+                print(ma[a]==1);
+            else if (d=="parent")
             {
-                ///4
-                scanf("%s%d",e,&f);
-                f+=delta;
-                print(pos[a]/2==pos[f]);
+                cin>>c>>b;
+                print(ma[a]==ma[b]/2);
             }
             else
             {
-                if (strcmp(d,"root")==0)
-                {
-                    ///1
-                    print(pos[a]==1);
-                }
-                else
-                {
-                    ///3
-                    scanf("%s%d",e,&f);
-                    f+=delta;
-                    print(pos[f]/2==pos[a]);
-                }
+                cin>>c>>b;
+                print(ma[a]/2==ma[b]);
             }
+        }
+        else
+        {
+            cin>>b>>c>>d;
+            print(ma[a]/2==ma[b]/2 && min(ma[a],ma[b])%2==0);
         }
     }
     return 0;
 }
+/*
+
+*/
