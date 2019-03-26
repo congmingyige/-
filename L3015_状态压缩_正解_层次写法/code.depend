@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1553601345 source:c:\users\scientific\desktop\code\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+
+1553609747 source:c:\users\scientific\cccc_code\l3015_×´Ì¬Ñ¹Ëõ_Õý½â\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+

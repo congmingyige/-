@@ -16,11 +16,43 @@ const int maxn=2e1+10;
 const int inf=1e9;
 const double eps=1e-8;
 
+int gx[maxn],gy[maxn];
 
 
 int main()
 {
-    printf("No Solution");  ///×î¶à1-2¸ö
+    int n,i,j;
+    char c;
+    scanf("%d",&n);
+    for (i=1;i<=n;i++)
+    {
+        scanf("%c",&c);
+        for (j=1;j<=n;j++)
+        {
+            scanf("%c",&c);
+            if (c=='W')
+                ++gx[i],++gy[j];
+            else if (c=='L')
+                ++gx[j],++gy[i];
+        }
+    }
+    if (n==2)
+    {
+        if (gx[1]==1 && gx[2]==1)
+            printf("1 2");
+        else
+            printf("No Solution");
+        return 0;
+    }
+
+    for (i=1;i<=n;i++)
+        if (gx[i]==0 || gy[i]==0)
+        {
+            printf("No Solution");
+            return 0;
+        }
+    for (i=1;i<=n;i++)
+        printf("%d%c",i,i==n?'\n':' ');
     return 0;
 }
 /*
