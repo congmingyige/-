@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1553524844 source:c:\users\scientific\cccc_code\l3015_状态压缩+折半搜索，求解哈密顿回路，但是无法做到字典序最小\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+
+1553526583 source:c:\users\lenovo\desktop\新建文件夹 (2)\新建文件夹\l3015 状态压缩+折半搜索，效率是一样的，无多大意义\l3015_状态压缩+折半搜索，求解哈密顿回路，但是无法做到字典序最小\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+

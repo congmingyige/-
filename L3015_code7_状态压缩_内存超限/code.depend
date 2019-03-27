@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1553597889 source:c:\users\scientific\desktop\code\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+
+1553610035 source:c:\users\scientific\cccc_code\l3015_状态压缩_内存超限\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+
+1553610035 source:c:\users\lenovo\desktop\新建文件夹 (2)\新建文件夹\l3015_状态压缩_内存超限\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+

@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1553601345 source:c:\users\scientific\desktop\code\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+
+1553609747 source:c:\users\scientific\cccc_code\l3015_状态压缩_正解\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+
+1553612121 source:c:\users\lenovo\desktop\新建文件夹 (2)\新建文件夹\l3015_状态压缩_正解_层次写法\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+

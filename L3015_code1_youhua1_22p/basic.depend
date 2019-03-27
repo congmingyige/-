@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1553526773 source:c:\users\lenovo\desktop\新建文件夹 (2)\新建文件夹\l3015_youhua1_22p\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+

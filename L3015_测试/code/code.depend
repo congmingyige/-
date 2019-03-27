@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1553611854 source:c:\users\scientific\desktop\code\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	<string>
+	<algorithm>
+	<set>
+	<map>
+	<queue>
+	<iostream>
+
