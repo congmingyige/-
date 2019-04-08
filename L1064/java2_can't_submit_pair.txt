@@ -1,0 +1,89 @@
+//package javacode;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javafx.util.Pair;
+
+public class Main {
+//public class l1064 {
+	public static void main(String[] args) {
+		int n,dif;
+		String s,s1="",s2;
+		StringBuffer s0;
+		Scanner in=new Scanner(System.in);
+		n=in.nextInt();
+		s=in.nextLine();	///ignore '\n'
+		while (n-->0) {
+			s=in.nextLine();
+			System.out.println(s);
+			
+			s=s.trim(); 	///delete pre,post 'blank'
+			s=s.replaceAll("\\s+", " ");			
+			s0=new StringBuffer(s);
+			Matcher m=Pattern.compile("\\s[^a-zA-Z0-9\\s]").matcher(s0);
+			///它会初始记录字符串的长度，之后遍历，作用域为该长度
+			while (true) {
+				m=Pattern.compile("\\s[^a-zA-Z0-9\\s]").matcher(s0);
+				if (!m.find())
+					break;
+				s0.deleteCharAt(m.start());
+			}
+			s=new String(s0);
+			
+			s=s.replaceAll("\\?", "!");
+			
+			for (int i=0;i<26;i++)
+				if (i!=8) {
+				s1=String.valueOf((char)(i+65));
+				s2=String.valueOf((char)(i+97));
+				s=s.replaceAll(s1,s2);
+			}
+			
+			Vector<Pair<Integer,Integer>> vec=new Vector<Pair<Integer,Integer>>();
+			m=Pattern.compile("[a-z|I|0-9]+").matcher(s);
+			while (m.find()) {
+				vec.add(new Pair<>(m.start(),m.end()));
+			}
+			Collections.reverse(vec);
+			int fx=-1,fy=-1,sx,sy;
+			Pair<Integer,Integer> pa;
+			s0=new StringBuffer(s);
+			for (Iterator<Pair<Integer,Integer>> it=vec.iterator();it.hasNext();) {
+				sx=fx;
+				sy=fy;
+				pa=it.next();
+				fx=pa.getKey();
+				fy=pa.getValue();
+				s1=s.substring(fx,fy);
+				if (sx==-1)
+					continue;
+				s2=s.substring(sx,sy);
+//				System.out.println(s1+" "+s2);
+				if (s2.compareTo("I")==0 || s2.compareTo("me")==0)
+					s0.replace(sx,sy,"you");
+				else if (s2.compareTo("you")==0) {
+					
+					if (s1.compareTo("can")==0) {
+						s0.replace(sx,sy,"can");
+						s0.replace(fx,fy,"I");
+					}
+					else if (s1.compareTo("could")==0) {
+						s0.replace(sx,sy,"could");
+						s0.replace(fx,fy,"I");
+					}
+				}
+			}
+			if (s1.compareTo("I")==0 || s1.compareTo("me")==0)
+				s0.replace(fx,fy,"you");
+			s=new String(s0);
+			
+			System.out.println("AI: "+s);
+		}
+	}
+}
+

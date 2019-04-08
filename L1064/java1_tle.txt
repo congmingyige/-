@@ -1,0 +1,97 @@
+//package javacode;
+
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+ 
+public class Main {
+//public class l1064_1 {
+	public static void main(String[] args) {
+		int n,dif,len1,len2,len3;
+		String s,s1="",s2="";
+		StringBuffer s0;
+		Scanner in=new Scanner(System.in);
+		n=in.nextInt();
+		s=in.nextLine();	///ignore '\n'
+		while (n-->0) {
+			s=in.nextLine();
+			System.out.println(s);
+			
+			s=s.trim(); 	///delete pre,post 'blank'
+			s=s.replaceAll("\\s+", " ");			
+			s0=new StringBuffer(s);
+			Matcher m=Pattern.compile("\\s[^a-zA-Z0-9\\s]").matcher(s0);
+			///它会初始记录字符串的长度，之后遍历，作用域为该长度
+			while (true) {
+				m=Pattern.compile("\\s[^a-zA-Z0-9\\s]").matcher(s0);
+				if (!m.find())
+					break;
+				s0.deleteCharAt(m.start());
+			}
+			s=new String(s0);
+			
+			s=s.replaceAll("\\?", "!");
+			
+			for (int i=0;i<26;i++)
+				if (i!=8) {
+				s1=String.valueOf((char)(i+65));
+				s2=String.valueOf((char)(i+97));
+				s=s.replaceAll(s1,s2);
+			}
+			
+			s0=new StringBuffer(s);
+			StringBuffer s00=new StringBuffer(s0);
+			dif=0;
+			s2="";
+			while (true) {
+				m=Pattern.compile("([a-z|A-Z|0-9]+)([^a-zA-Z0-9]{1,2})([a-z|A-Z|0-9]+)").matcher(s00);
+				if (!m.find()) {
+					if (s2.compareTo("")==0) {
+						m=Pattern.compile("[a-z|A-Z|0-9]+").matcher(s00);
+						if (m.find()) {
+							s2=m.group(0);
+							if (s2.compareTo("I")==0 || s2.compareTo("me")==0)
+								s0.replace(m.start(),m.start()+s2.length(),"you");
+						}
+					}
+					else {
+//						System.out.println("cur s = "+s0);
+//						System.out.println("dif = "+dif);
+						
+						if (s2.compareTo("I")==0 || s2.compareTo("me")==0)
+							s0.replace(dif,dif+s2.length(),"you");
+						
+//						System.out.println("cur s = "+s0);
+					}
+					break;
+				}
+				s1=m.group(1);
+				s2=m.group(3);
+				len1=s1.length();
+				len2=s2.length();
+				len3=m.group(2).length();
+				if (s1.compareTo("I")==0 || s1.compareTo("me")==0) {
+					s0.replace(dif,dif+len1,"you");
+					dif=dif+3-len1;
+				}
+				else if (s1.compareTo("can")==0 && s2.compareTo("you")==0) {
+					s0.replace(dif+m.start()+len1+len3,dif+m.end(),"can");
+					s0.replace(dif+m.start(),dif+len1,"I");
+					dif=dif+4-len1-len2;
+				}
+				else if (s1.compareTo("could")==0 && s2.compareTo("you")==0) {
+					s0.replace(dif+m.start()+len1+len3,dif+m.end(),"could");
+					s0.replace(dif+m.start(),dif+len1,"I");
+					dif=dif+6-len1-len2;
+				}
+				
+				dif=dif+m.start()+len1+len3;
+				s00.delete(0,m.start()+len1+len3);
+			}
+
+			s=new String(s0);
+			
+			System.out.println("AI: "+s);
+		}
+	}
+}

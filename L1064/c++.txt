@@ -1,0 +1,99 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+#include <set>
+#include <map>
+#include <stack>
+#include <queue>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+const int maxn=1e3+10;
+const double eps=1e-8;
+
+/*
+认真读题再下手
+
+标点符号 ： 非空字符串，仅包括字母、数字、空格、可见的半角标点符号
+
+*/
+
+char s[maxn],str[maxn][maxn];
+bool sym[maxn],pr[maxn];
+
+bool judge(int i)
+{
+    return (s[i]>='a' && s[i]<='z') || (s[i]>='A' && s[i]<='Z') || (s[i]>='1' && s[i]<='9');
+}
+
+int main()
+{
+    int q,g,len,i,j;
+    scanf("%d\n",&q);
+    while (q--)
+    {
+        memset(sym,0,sizeof(sym));
+        memset(pr,0,sizeof(pr));
+        cin.getline(s,maxn);
+        len=strlen(s);
+        ///task1
+        printf("%s\nAI: ",s);
+
+        ///task3&6
+        for (i=0;i<len;i++)
+            if (s[i]>='A' && s[i]<='Z' && s[i]!='I')
+                s[i]=s[i]-'A'+'a';
+            else if (s[i]=='?')
+                s[i]='!';
+
+        ///task2
+        g=0;
+        for (i=0;i<len;i++)
+            if (s[i]!=' ')
+            {
+                g++;
+                ///把标点符号分开，方便后续的单词判断
+                if (!judge(i))
+                {
+                    str[g][0]=s[i];
+                    str[g][1]=0;
+                    sym[g]=1;
+                    pr[g+1]=(s[i+1]!=' ');
+                }
+                else
+                {
+                    j=0;
+                    while (i!=len && judge(i))
+                        str[g][j++]=s[i++];
+                    i--;
+                    str[g][j]=0;
+                }
+            }
+
+        ///task4&5
+        for (i=1;i<=g;i++)
+        {
+            ///标点前面不输出空格
+            if (sym[i])
+            {
+                printf("%s",str[i]);
+                continue;
+            }
+            ///标点后面有可能没有空格，这个标点后面的单词的前面不应该输出空格；其余单词前面输出空格
+            if (i!=1 && !pr[i])
+                cout<<" ";
+            if (i!=g && strcmp(str[i],"can")==0 && strcmp(str[i+1],"you")==0)
+                cout<<"I can",i++;
+            else if (i!=g && strcmp(str[i],"could")==0 && strcmp(str[i+1],"you")==0)
+                cout<<"I could",i++;
+            else if (strcmp(str[i],"I")==0 || strcmp(str[i],"me")==0)
+                cout<<"you";
+            else
+                cout<<str[i];
+        }
+        cout<<endl;
+    }
+    return 0;
+}
