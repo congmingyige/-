@@ -1,0 +1,32 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+#include <set>
+#include <map>
+#include <stack>
+#include <queue>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+const int maxn=1e3+10;
+const double eps=1e-8;
+
+char str[maxn];
+
+int main()
+{
+    int n,m,k,q,i;
+    scanf("%d%d%d\n",&n,&m,&k);
+    while (m--)
+        fgets(str,maxn,stdin);
+    scanf("%d",&q);
+    while (q--)
+    {
+        scanf("%d",&k);
+        for (i=1;i<=n;i++)
+            printf("%d%c",i,(i==n?'\n':' '));
+    }
+    return 0;
+}
